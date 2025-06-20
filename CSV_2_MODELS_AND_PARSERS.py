@@ -202,13 +202,15 @@ def main():
 
     # === Program.cs ===
     with open("Program.cs", "w") as f:
-        f.write(f"{data_domain_id}CsvParser parser = new {data_domain_id}CsvParser();\n")
-        f.write(f"{data_domain_id}DataCollection allParsed{data_domain_id}Data = new {data_domain_id}DataCollection();\n\n")
+        f.write(f'Console.WriteLine("Parsing {data_domain_id} csv files");\n')
+        f.write(f"{data_domain_id}CsvParser {data_domain_id.lower()}CsvParser = new {data_domain_id}CsvParser();\n")
+        f.write(f"{data_domain_id}DataCollection allParsed{data_domain_id}Data = new {data_domain_id}DataCollection();\n")
         for subtype in subtype_to_props:
             class_name = get_class_name(data_domain_id, subtype)
-            f.write(f"allParsed{data_domain_id}Data.{class_name} = parser.Parse{class_name}(Path.Combine(userSelectedSourceDirectory, \"{data_domain_id.upper()}_{subtype}.csv\")).{class_name};\n")
-        f.write(f"\nGenerate{data_domain_id}Json.Generate(allParsed{data_domain_id}Data, userSelectedOutputDirectory);\n")
-        f.write(f"\nConsole.WriteLine(\"{data_domain_id} data created.\");\n")
+            f.write(f"allParsed{data_domain_id}Data.{class_name} = {data_domain_id.lower()}CsvParser.Parse{class_name}(Path.Combine(userSelectedSourceDirectory, \"{data_domain_id.upper()}_{subtype}.csv\")).{class_name};\n")
+        f.write(f'\nConsole.WriteLine("Generating {data_domain_id}.json");\n')
+        f.write(f"Generate{data_domain_id}Json.Generate(allParsed{data_domain_id}Data, userSelectedOutputDirectory);\n")
+        f.write(f'Console.WriteLine("{data_domain_id} data created.");\n')
 
     print("Models.cs, Parser.cs, Program.cs, and Duplicates.txt generated.")
 
