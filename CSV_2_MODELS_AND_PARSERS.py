@@ -96,7 +96,7 @@ def main():
                     f.write(f"\t{s}\n")
 
     # === Models.cs ===
-    with open(f"{data_domain_id}Models.cs", "w") as f:
+    with open(f"{data_domain_id}DataModels.cs", "w") as f:
         f.write(f"namespace FAA_DATA_HANDLER.Models.NASR.CSV\n{{\n")
         f.write(f"    public class {data_domain_id}DataModel\n    {{\n")
 
@@ -153,7 +153,7 @@ def main():
         f.write(f"    }}\n}}")
 
     # === Parser.cs ===
-    with open(f"{data_domain_id}Parser.cs", "w") as f:
+    with open(f"{data_domain_id}DataParser.cs", "w") as f:
         f.write(f"using FAA_DATA_HANDLER.Models.NASR.CSV;\n")
         f.write(f"using System;\nusing System.Collections.Generic;\nusing System.IO;\n")
         f.write(f"using static FAA_DATA_HANDLER.Models.NASR.CSV.{data_domain_id}DataModel;\n\n")
@@ -212,7 +212,7 @@ def main():
         f.write(f"Generate{data_domain_id}Json.Generate(allParsed{data_domain_id}Data, userSelectedOutputDirectory);\n")
         f.write(f'Console.WriteLine("{data_domain_id} data created.");\n')
 
-    print("Models.cs, Parser.cs, Program.cs, and Duplicates.txt generated.")
+    print("DataModels.cs, DataParser.cs, Program.cs, and Duplicates.txt generated.")
 
 if __name__ == '__main__':
     main()
